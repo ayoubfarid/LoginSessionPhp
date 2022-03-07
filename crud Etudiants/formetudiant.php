@@ -1,17 +1,7 @@
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
+require_once('connexion.php');
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=testphp", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
-} catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-}
 $req="SELECT * FROM Etudiant";
 $smt=$conn->query($req);
 $rows =$smt->fetchAll(PDO::FETCH_ASSOC);
@@ -47,13 +37,13 @@ $rows =$smt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     
-    <form action="crud Etudiants/formAdd.php" method="post">
+    <form action="crud Etudiants/formAdd.php" method="post" required>
         <h2>Formulaire ajouter etudiant</h2>
         <label for="nom"> Nom </label>
-        <input class="inputspec" type="text" name="nom" id="nom">
+        <input class="inputspec" type="text" name="nom" id="nom" required>
         <br>
         <label for="prenom">Prenom</label>
-        <input class="inputspec" type="text" name="prenom" id="prenom">
+        <input class="inputspec" type="text" name="prenom" id="prenom" required>
         <br>
         <label for="Cne">Cne</label><br>
         <input type="text" name="cne" id="cne" value="">

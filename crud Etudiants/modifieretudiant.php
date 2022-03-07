@@ -1,24 +1,13 @@
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=testphp", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
-} catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-}
+require_once('connexion.php');
 if (isset($_GET["cne"]))
 {
     $cne=$_GET["cne"];
     $req=  "SELECT * FROM  etudiant  WHERE Cne =$cne";
-    $smt=$conn->query($req);
-    $rows =$smt->fetchAll(PDO::FETCH_ASSOC);
-    $etud=$rows[0];
+    $smt=$conn->query($req);// query for select and exec for update ,insert and delete
+    $rows =$smt->fetch(PDO::FETCH_ASSOC);//fetch all for array of set record and fetch for one record
+    $etud=$rows;
     print_r($etud);
 }
 
@@ -56,11 +45,11 @@ if (isset($_GET["cne"]))
 <form action="modifieretudiant.php" method="post">
     <h2>Modifier letudiant </h2>
     <label for="nom"> Nom </label>
-    <input class="inputspec" value=<?php echo $etud["Nom"]?> type="text" name="nom" id="nom">
+    <input class="inputspec" value=<?php echo $etud["Nom"]?> type="text" name="nom" id="nom" required>
     <br>
     <input type="text" name="cne" value=<?php echo $_GET["cne"]?> hidden>
     <label for="prenom">Prenom</label>
-    <input class="inputspec" type="text" value=<?php echo $etud["Prenom"]?> name="prenom" id="prenom">
+    <input class="inputspec" type="text" value=<?php echo $etud["Prenom"]?> name="prenom" id="prenom" required>
     <br>
     <br>
     <input type="submit" value="Envoyer">
