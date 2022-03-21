@@ -11,12 +11,13 @@ if (isset($_SESSION['error']))
 ?>
     <br>
 
-<label for="login"> Login </label>
+<label for="login"> Username :</label>
     <input type="text" name="login" id="login" /><br>
-<label for="password"> Password </label>
+<label for="password"> Password :</label>
 <input type="password" name="pass" id="pass" /><br>
     <br>
-
+    <a href="register.php"> cree un compte ? </a>
+    <br>
     <input type="submit" value="Submit" />
 </form>
 
